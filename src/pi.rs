@@ -62,3 +62,15 @@ const fn series(d: u16, j: i32) -> f64 {
 
     sum
 }
+
+const fn pi(digit: u16) {
+    const s1: f64 = series(digit, 1);
+    const s4: f64 = series(digit, 4);
+    const s5: f64 = series(digit, 5);
+    const s6: f64 = series(digit, 6);
+
+    let mut pi_digit: f64 = 4f64 * s1 - 2f64 * s4 - s5 - s6;
+    pi_digit = pi_digit as i32 as f64;
+
+    return 16f64 * pi_digit;
+}
