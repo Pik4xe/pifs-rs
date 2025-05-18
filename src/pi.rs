@@ -36,3 +36,29 @@ pub const fn binpow(a: u64, mut b: u64, mod_val: u64) -> u64 {
 
     result
 }
+
+const fn series(d: u16, j: i32) -> f64 {
+    let mut sum: f64 = 0.0;
+
+    for k in 0..=d {
+        sum += binpow(16, (d - k) as u64, (8u16 * k + j as u16) as u64) as f64
+            / (8 * k + j as u16) as f64;
+        sum -= sum as i32 as f64;
+    }
+
+    let mut k = d + 1;
+    loop {
+        let mut inc: f64 = power(16f64, (d - k) as i32);
+        inc = inc / (8 * k + j as u16) as f64;
+
+        if inc < 1e-7 {
+            break;
+        }
+
+        sum += inc;
+        sum -= sum as i32 as f64; // digma floor method
+        k += 1;
+    }
+
+    sum
+}
