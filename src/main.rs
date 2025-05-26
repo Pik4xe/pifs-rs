@@ -44,7 +44,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         // Process each byte in the buffer slice that was just read
         for byte in &buffer[0..bytes_read] {
             // Get the corresponding Pi index for the byte
-            let index = encoder.get(*byte);
+            let index = encoder.index(*byte);
             // Print the index, followed by a newline
             println!("{}", index);
         }
